@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV | Deri Ramdani</title>
     
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
+    <!-- html2canvas untuk fitur download gambar -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
@@ -95,7 +98,7 @@
             gap: 6px;
         }
 
-        /* Header Layout */
+        /* Header Layout - Tetap Grid 2 Kolom */
         .header-grid {
             display: grid;
             grid-template-columns: 120px 1fr;
@@ -305,13 +308,13 @@
     </div>
 
     <div class="controls">
-        <a href="/" class="back-btn"><i class="fas fa-arrow-left"></i> Kembali</a>
-        
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Kembali</a>
         <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
             <i class="fas fa-moon"></i> <span>Mode Gelap</span>
         </button>
     </div>
 
+    <!-- Area Konten A4 -->
     <div class="cv-page" id="cv-content">
         <header class="header-grid">
             <div class="photo-container">
@@ -409,6 +412,7 @@
         </section>
     </div>
 
+    <!-- Tombol Navigasi Luar -->
     <div class="external-footer">
         <button onclick="downloadImage()" class="btn-download">
             <i class="fas fa-image"></i> DOWNLOAD GAMBAR (PNG)
