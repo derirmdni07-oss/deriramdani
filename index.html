@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Deri Ramdani | Professional Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            /* Mode Gelap (Default) */
+            --bg-body: #020617;
+            --bg-card: #0f172a;
+            --primary: #3b82f6;
+            --secondary: #a855f7;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+            --glass: rgba(15, 23, 42, 0.8);
+            --nav-bg: rgba(2, 6, 23, 0.8);
+            --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        [data-theme="light"] {
+            /* Mode Terang */
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --text-main: #0f172a;
+            --text-dim: #475569;
+            --border: rgba(0, 0, 0, 0.08);
+            --glass: rgba(255, 255, 255, 0.9);
+            --nav-bg: rgba(248, 250, 252, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        /* Latar Belakang Glow */
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .glow-1 {
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            filter: blur(80px);
+        }
+
+        /* Navigasi */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: var(--nav-bg);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            text-decoration: none; /* Tambahan agar link logo bersih */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Hero Container */
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 5% 60px;
+            width: 100%;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        /* Profile Card */
+        .profile-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+
+        .image-outer {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            padding: 6px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.2);
+        }
+
+        .image-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--bg-card);
+        }
+
+        .image-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-card h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .expertise-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        /* Content Area */
+        .content-area {
+            width: 100%;
+        }
+
+        .content-area h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .highlight {
+            background: linear-gradient(to bottom right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .description {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text-dim);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
+
+        /* Skill Cards */
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .skill-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 1.25rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .skill-icon {
+            font-size: 1.25rem;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+            min-width: 180px;
+        }
+
+        .btn-primary { 
+            background: var(--primary); 
+            color: #fff; 
+            box-shadow: 0 15px 30px -10px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary { 
+            background: var(--bg-card); 
+            color: var(--text-main); 
+            border: 1px solid var(--border); 
+        }
+
+        .btn:hover { transform: translateY(-3px); }
+
+        /* Privacy Banner */
+        .privacy-banner {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .privacy-content h3 { font-size: 0.95rem; margin-bottom: 0.2rem; }
+        .privacy-content p { font-size: 0.8rem; color: var(--text-dim); }
+
+        /* Theme Control */
+        .theme-control {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1001;
+        }
+
+        .theme-toggle {
+            width: 56px;
+            height: 56px;
+            background: var(--primary);
+            border-radius: 18px;
+            border: none;
+            color: white;
+            font-size: 1.25rem;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 1024px) {
+            .hero-container { grid-template-columns: 1fr; gap: 3rem; }
+            .profile-card { margin: 0 auto; max-width: 420px; }
+            .content-area { text-align: center; }
+            .description { margin-left: auto; margin-right: auto; }
+            .btn-group { justify-content: center; }
+            .privacy-banner { max-width: 600px; margin: 0 auto; text-align: left; }
+            .nav-links { display: none; }
+        }
+
+        @media (max-width: 640px) {
+            main { padding-top: 100px; padding-bottom: 40px; }
+            .content-area h1 { font-size: 2.2rem; }
+            .btn-group { flex-direction: column; }
+            .btn { width: 100%; }
+            .image-outer { width: 150px; height: 150px; }
+            .profile-card { padding: 2rem 1.5rem; border-radius: 32px; }
+            .privacy-banner { flex-direction: column; gap: 1rem; text-align: center; padding: 1.25rem; }
+            .theme-control { bottom: 20px; right: 20px; }
+            .theme-toggle { width: 48px; height: 48px; border-radius: 14px; }
+            .skill-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <div class="bg-glow">
+        <div class="glow-1"></div>
+    </div>
+
+    <nav>
+        <a href="/" class="logo">DERI RAMDANI</a>
+        <div class="nav-links">
+            <a href="https://wa.me/6285156964723" target="_blank">Whatsapp</a>
+            <a href="mailto:deriramdani007@gmail.com">Email</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="hero-container">
+            <div class="profile-card">
+                <div class="image-outer">
+                    <div class="image-inner">
+                        <img src="https://lh3.googleusercontent.com/d/167aJWprrU0Lf5T0T65F-3YXtOcfmMpFL" alt="Deri Ramdani">
+                    </div>
+                </div>
+                <h2>DERI RAMDANI</h2>
+                <div class="expertise-tags">
+                    <span class="tag">CPA Marketing</span>
+                    <span class="tag">Teknik Listrik</span>
+                </div>
+                <p style="color: var(--text-dim); font-size: 0.85rem; margin-top: 1.5rem;">
+                    <i class="fas fa-map-marker-alt"></i> Sumedang, Indonesia
+                </p>
+            </div>
+
+            <div class="content-area">
+                <h1>Keahlian Teknis & <br><span class="highlight">Akselerasi Digital.</span></h1>
+                
+                <p class="description">
+                    Menghubungkan dunia fisik melalui sistem kelistrikan yang presisi dan menguasai dunia digital dengan strategi <strong>CPA Marketing</strong> untuk hasil konversi maksimal.
+                </p>
+
+                <div class="skill-grid">
+                    <div class="skill-item">
+                        <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
+                        <div>
+                            <h4 style="font-size: 0.85rem;">CPA Marketing</h4>
+                            <p style="font-size: 0.75rem; color: var(--text-dim);">Optimasi Profit & Traffic</p>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon"><i class="fas fa-bolt"></i></div>
+                        <div>
+                            <h4 style="font-size: 0.85rem;">Teknik Listrik</h4>
+                            <p style="font-size: 0.75rem; color: var(--text-dim);">Instalasi & Maintenance</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <a href="/detail" class="btn btn-primary">
+                        <i class="fas fa-id-card"></i> Lihat Detail CV
+                    </a>
+                    <a href="https://wa.me/6285156964723" class="btn btn-secondary">
+                        <i class="fab fa-whatsapp"></i> Hubungi Saya
+                    </a>
+                </div>
+
+                <div class="privacy-banner">
+                    <div style="font-size: 1.5rem; color: var(--primary);"><i class="fas fa-user-shield"></i></div>
+                    <div class="privacy-content">
+                        <h3>Keamanan Privasi Data</h3>
+                        <p>Dokumen portofolio proyek dan sertifikasi asli bersifat privat. Akses diberikan melalui permintaan personal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="theme-control">
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Ganti Tema">
+            <i class="fas fa-sun" id="themeIcon"></i>
+        </button>
+    </div>
+
+    <footer>
+        <p>© 2026 DERI RAMDANI • Profesionalisme & Integritas</p>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('themeIcon');
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            localStorage.setItem('theme', newTheme);
+        }
+
+        window.onload = () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.body.setAttribute('data-theme', savedTheme);
+            document.getElementById('themeIcon').className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+    </script>
+</body>
+</html>
